@@ -1,0 +1,445 @@
+<html>
+<head>
+<style>
+#headingdiv{
+padding:2px;
+textsize:150px;
+}
+input {
+    display: block;
+	margin:3px;
+	padding:3px;
+	color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+	
+}
+#elementsdiv{
+padding:5px;
+margin:5px;
+}
+datalist {
+    display: block;
+}
+button
+{
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+
+</style>
+
+</head>
+<body>
+<script>
+function regenerateForm(){
+	var retrievedData = localStorage.getItem("json");
+var movies2 = JSON.parse(retrievedData);
+console.log(movies2);
+
+}
+
+jsonObj = [];
+item1={};
+item2={};
+item3={};
+item4={};
+item5={};
+item6={};
+item7={};
+function hide(){
+	var user=document.getElementById("s");
+	user.style.display="none";
+
+}
+function createText(){
+	hide();
+	var tname = prompt("Enter text name for text feild");
+	
+	if(tname=="" || tname==null){
+		alert("Invalid name");
+	}
+	else{
+	
+	var user=document.getElementById("user");
+	var lab = document.createElement("label");
+	lab.innerHTML="</br>"+tname+"</br>";
+	user.appendChild(lab);
+	var text = document.createElement("input");
+	text.type = "text";
+	text.name = "myname";
+	text.value = "";
+	var min = prompt("Enter lower range");
+	while((isNaN(min))){
+		min = prompt("Enter lower range");
+	}
+	var max = prompt("Enter upper range");
+	while((isNaN(max))){
+		max = prompt("Enter upper range");
+	}
+	text.dataset.min=min;
+	text.dataset.max=max;
+	user.appendChild(text);
+	
+	item1["type"] = "text";
+	item1["name"] = "myname";
+	item1["value"]= tname;
+	jsonObj.push(item1);
+	console.log(jsonObj);
+	}
+}
+
+
+function createSelect(){
+	hide();
+	myselect = document.createElement("select");
+	var select=document.getElementById("select");
+	
+	var sname=prompt("Enter select label for the label:");
+	if(sname=="" || sname==null){
+		alert("Invalid name");
+	}
+	else{
+	
+	var lab = document.createElement("label");
+	lab.innerHTML=sname+"</br>";
+	select.appendChild(lab);
+
+	var opt=prompt("Enter option. When you want to finish, Enter '.'");
+	while(opt!="."){
+		theOption=document.createElement("OPTION");
+		theText=document.createTextNode(opt);
+		theOption.appendChild(theText);
+		myselect.appendChild(theOption);
+		opt=prompt("Enter option. Enter '.' if you want to end options.");
+		if(opt=="" || opt==null){
+		var opt=prompt("Enter option. When you want to finish, Enter '.'");
+	}
+	
+	}
+	select.appendChild(myselect);
+}
+}
+
+function createCheck(){
+hide();
+	var check=document.getElementById("check");
+	var checkname = prompt("Enter the value for the check option");
+	var opt=prompt("Enter 1 for optional")
+	check.innerHTML = check.innerHTML +checkname+"<input type='checkbox' name='mytext'"+"optional="+opt +">";
+	item2["type"] = "checkbox";
+	item2["name"] = "mytext";
+	item2["value"]= checkname;
+	jsonObj.push(item2);
+	console.log(jsonObj);
+
+
+}
+
+function createPass(){
+	hide();
+	var lab = document.createElement("label");
+	var password=document.getElementById("pass");
+	
+	lab.innerHTML="</br>"+"Password"+"</br>";
+	password.appendChild(lab);
+	var text = document.createElement("input");
+	text.type = "password";
+	text.value = "";
+	var min = prompt("Enter lower range");
+	while((isNaN(min))){
+		min = prompt("Enter lower range");
+	}
+	var max = prompt("Enter upper range");
+	while((isNaN(max))){
+		max = prompt("Enter upper range");
+	}
+	text.dataset.min=min;
+	text.dataset.max=max;
+	
+	
+	password.appendChild(text);
+	
+	item3["type"] = "text";
+	item3["name"] = "myname";
+	item3["value"]= "";
+	jsonObj.push(item3);
+	
+}
+
+function createkeygen(){
+hide();
+var keygenn=document.getElementById("keygen");
+
+var keygenname = prompt("Keygen value");
+keygenn.innerHTML = keygenn.innerHTML +keygenname+" <keygen name='security'>"
+	
+	item4["type"] = "keygen";
+	item4["name"] = "security";
+	item4["value"]= keygenname;
+	jsonObj.push(item4);
+	
+
+}
+
+
+function createRadio(){
+hide();
+	var radioas=document.getElementById("radio");
+
+	var radioname = prompt("Enter the value for the radio button");
+var opt=prompt("Enter 1 for optional");
+	
+	radioas.innerHTML = radioas.innerHTML +radioname+"<input type='radio' name='mytext'"+ " optional="+opt+">";
+	item5["type"] = "radio";
+	item5["name"] = "mytext";
+	item5["value"]= radioname;
+	jsonObj.push(item5);
+	
+
+	}
+function createNumber(){
+hide();
+	var num=document.getElementById("num");
+
+	var radioname = prompt("Enter the value for the number button");
+	if(radioname=="" || radioname==null){
+		alert("Invalid name");
+	}
+	else{
+	var lrange = prompt("Enter lower range");
+	while((isNaN(lrange))){
+		lrange = prompt("Enter lower range");
+	}
+	var urange = prompt("Enter upper range");
+	while((isNaN(urange))){
+		urange = prompt("Enter upper range");
+	}
+	num.innerHTML = num.innerHTML +radioname+"<input type='number' name='mytext'"+ " data-max="+urange+ " data-min="+lrange+ ">";
+	item6["type"] = "number";
+	item6["name"] = "mytext";
+	item6["value"]= radioname;
+	jsonObj.push(item6);
+	}
+
+	}
+function createOption(){
+hide();
+	var num=document.getElementById("file");
+
+	var radioname = prompt("Enter the value for the file button");
+var opt=prompt("Enter 1 for optional")
+
+	num.innerHTML = num.innerHTML +radioname+"<input type='file' name='mytext'"+"optional="+opt+">";
+	item7["type"] = "file";
+	item7["name"] = "mytext";
+	item7["value"]= radioname;
+	jsonObj.push(item7);
+	
+
+	}
+function createTextarea(){
+hide();
+	var num=document.getElementById("textarea");
+
+	var radioname = prompt("Enter the value for the text area");
+	if(radioname=="" || radioname==null){
+		alert("Invalid name");
+	}
+	else{
+	var min = prompt("Enter lower range");
+	while((isNaN(min))){
+		min = prompt("Enter lower range");
+	}
+	var max = prompt("Enter upper range");
+	while((isNaN(max))){
+		max = prompt("Enter uppe range");
+	}
+	
+	num.innerHTML = num.innerHTML +radioname+"<input type='textarea' name='mytext'"+"data-max="+max+" data-min="+min +" >";
+	item8["type"] = "textarea";
+	item8["name"] = "mytext";
+	item8["value"]= radioname;
+	jsonObj.push(item8);
+	}
+
+	}
+
+function createData(){
+hide();
+	var datalist= document.getElementById("datalist");
+	var input = document.createElement("datalist");
+        input.name = prompt("Name of datalist element");
+        input.value = prompt("Value of input");
+        var number = prompt("Enter number of datalist elements");
+        var opt=prompt("Enter 1 for optional")
+
+        for(i=0;i<number;i++){
+            var option = document.createElement("option");
+            option.value= prompt("Value of option");
+            option.text= prompt("Text of option");
+			option.dataset.optional=opt
+            input.appendChild(option);
+        }
+	datalist.appendChild(input);
+	}
+
+function submission(){
+
+var elem = document.getElementById('form').elements;
+    
+    for(var i = 0; i < elem.length; i++)
+    {
+        var min = elem[i].dataset.min;
+        var max = elem[i].dataset.max;
+        var optional = elem[i].dataset.optional;
+        var value = elem[i].value;
+        
+        //alert(elem[i]);
+        if(elem[i].name != "submit"){
+            
+            /*if((optional == undefined || optional !=1)){
+                if(elem[i].type="select"){}
+                if(elem[i].value == "" ){
+                    error += elem[i].name + " is required <br/>"; 
+                    continue;
+                }
+            }
+            if(min != undefined && value.length <min){
+                error += "Value of " + elem[i].name + " is less than minimum required length<br/>"; 
+                continue;
+            }
+            if(max != undefined && value.length >max){
+                error += "Value of " + elem[i].name + " is more than maximum required length <br/>"; 
+                continue;
+            }*/
+        }
+    } 
+    
+
+
+    localStorage.setItem("json", JSON.stringify(jsonObj));
+    //json+="]}";
+    alert("Will fetch from local storage");
+    alert(localStorage.getItem("json"));
+
+}	
+function myFunction() {
+	var fname = prompt("Enter form name");
+    if(fname != null){
+		formdiv=document.getElementById("formdiv");
+		myform=document.createElement("form");
+		myform.setAttribute("id","myform");
+		headdiv=document.getElementById("headingdiv");
+		headdiv.innerHTML=fname;
+		
+	var b1 = document.createElement("input");
+	b1.id="submit"
+	b1.type = "Submit";
+	b1.name="submit";
+	b1.value = "Submit";
+	b1.onclick = "submission()";
+	myform.appendChild(b1);
+	formdiv.appendChild(myform);
+
+	json = '{"form"[';
+    document.getElementById("submit").addEventListener("click", function () {
+        submission();
+    });
+	elementsdiv=document.getElementById("elementsdiv");
+
+	var v1 = document.createElement("input");
+	v1.type = "button";
+	v1.value = "Create Text";
+	v1.onclick=createText;
+	elementsdiv.appendChild(v1);
+
+	var v2 = document.createElement("input");
+	v2.type = "button";
+	v2.value = "Create Password";
+	v2.onclick=createPass;
+	elementsdiv.appendChild(v2);
+
+	var v3 = document.createElement("input");
+	v3.type = "button";
+	v3.value = "Create Select";
+	v3.onclick=createSelect;
+	elementsdiv.appendChild(v3);
+
+	var v4 = document.createElement("input");
+	v4.type = "button";
+	v4.value = "Create Radio Buttons";
+	v4.onclick=createRadio;
+	elementsdiv.appendChild(v4);
+
+	var v5 = document.createElement("input");
+	v5.type = "button";
+	v5.value = "Create Check Options";
+	v5.onclick=createCheck;
+	elementsdiv.appendChild(v5);
+ 	
+	var v6 = document.createElement("input");
+	v6.type = "button";
+	v6.value = "Create keygen Options";
+	v6.onclick=createkeygen;
+	elementsdiv.appendChild(v6);
+ 	
+	var v7 = document.createElement("input");
+	v7.type = "button";
+	v7.value = "Create Number Options";
+	v7.onclick=createNumber;
+	elementsdiv.appendChild(v7);
+ 	
+	var v8 = document.createElement("input");
+	v8.type = "button";
+	v8.value = "Create File Options";
+	v8.onclick=createOption;
+	elementsdiv.appendChild(v8);
+ 	
+	var v9 = document.createElement("input");
+	v9.type = "button";
+	v9.value = "Create textarea Options";
+	v9.onclick=createTextarea;
+	elementsdiv.appendChild(v9);
+ 	
+	var v10 = document.createElement("input");
+	v10.type = "button";
+	v10.value = "Create DataList Options";
+	v10.onclick=createData;
+	elementsdiv.appendChild(v10);
+ 	
+	var v11 = document.createElement("input");
+	v11.type = "button";
+	v11.value = "Regenrate File";
+	v11.onclick=regenerateForm;
+	elementsdiv.appendChild(v11);
+ 	
+	
+	}
+	else{
+	myFunction();
+	}
+
+}
+</script>
+
+<div id="s"><button onclick="myFunction()">Create Form</button></div></br></br>
+
+<h2 id="headingdiv"></h2>
+<div id="elementsdiv"></div></br></br>
+<div id="formdiv"></div>
+<div id="pass"></div>
+<div id="user"></div>
+<div id="textarea"></div>
+<div id="datalist"></div>
+<div id="select"></div>
+<div id="check"></div>
+<div id="radio"></div>
+<div id="keygen"></div>
+<div id="num"></div>
+<div id="file"></div>
+
+
+</body>
+</html>
